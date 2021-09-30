@@ -9,16 +9,6 @@
 <title></title>
 </head>
 <body>
-    <% 
-     
-    String ageStr = request.getParameter("age");
-    int age = Integer.parseInt(ageStr);
-
-    String msg = (age > 19) ? "성인" : "미성년자";
-    
-    %>
-
-    <h1>당신은 <%= msg %> 입니다. </h1>
-
+<h1>로그인 실패!!</h1>
 </body>
 </html>
