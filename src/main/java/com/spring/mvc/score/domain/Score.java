@@ -24,16 +24,21 @@ public class Score {
 
     public Score() {
         this.stuNum = ++seq;
-        this.total = this.kor + this.eng + this.math;
-        this.average = Math.round((this.total / 3.0) * 100) / 100.0;
+        calcTotal();
 
     }
+
+    public void calcTotal() {
+        this.total = this.kor + this.eng + this.math;
+        this.average = Math.round((this.total / 3.0) * 100) / 100.0;
+    };
+
+
     public Score(String name, int kor, int eng, int math) {
         this();
         this.name = name;
         this.kor = kor;
         this.eng = eng;
         this.math = math;
-
     }
 }
