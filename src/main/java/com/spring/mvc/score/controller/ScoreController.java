@@ -5,6 +5,8 @@ import com.spring.mvc.score.repository.ScoreRepository;
 import com.spring.mvc.score.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +16,19 @@ import java.util.List;
 
 @Controller
 @Log4j2 // 로그 출력을 도와주는 기능
-@RequiredArgsConstructor // final필드를 초기화하는 생성자 자동생성
+//@RequiredArgsConstructor // final필드를 초기화하는 생성자 자동생성
 public class ScoreController {
 
     private final ScoreRepository scoreRepository;
     private final ScoreService scoreService;
-   /* @Autowired
+
+    @Autowired
+    public ScoreController(@Qualifier("jr") ScoreRepository scoreRepository, ScoreService scoreService) {
+        this.scoreRepository = scoreRepository;
+        this.scoreService = scoreService;
+    }
+
+    /* @Autowired
     public ScoreController(ScoreRepository scoreRepository) {
         this.scoreRepository = scoreRepository;
     }*/
@@ -48,5 +57,7 @@ public class ScoreController {
         scoreRepository.remove(stuNum);
         return "redirect:/score/list";
     }
+
+
 }
 

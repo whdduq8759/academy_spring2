@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository // 스프링에 저장소 빈으로 등록
+@Repository("mr") // 스프링에 저장소 빈으로 등록(memoryScoreRepository)
 @Log4j2
 // 메모리에 성적정보들을 모아서 저장해야 한다.
 public class MemoryScoreRepository implements ScoreRepository {
