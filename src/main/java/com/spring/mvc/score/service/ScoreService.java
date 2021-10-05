@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-// 컨트롤러와 저장소 중간에서 데이터 중간처리를 담당하는 클래스
+//컨트롤러와 저장소 중간에서 데이터 중간처리를 담당하는 클래스
 @Log4j2
 @Service
 public class ScoreService {
@@ -25,4 +25,5 @@ public class ScoreService {
         score.calcTotal();
         scoreRepository.save(score);
     }
+
 }
