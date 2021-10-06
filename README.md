@@ -66,8 +66,21 @@ public class RootConfig {
 }
 ```
 ## mybatis 기본 설정
+1. mvc 밑에 config 폴더를 만들고 DataBaseConfig java파일을 만든 후에 설정하기
+```//DB연결정보, 커넥션풀 설정
+  @Bean
+  public DataSource dataSource() {
+  HikariConfig config = new HikariConfig();
+  config.setUsername("spring3");
+  config.setPassword("1234");
+  config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:xe");
+  config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 
-1. mybatis 설정 파일
+        return new HikariDataSource(config);
+  }
+```
+
+2. mybatis 설정 파일
 - bulid.gradle 안에 추가하기!!
 
 ```
@@ -75,7 +88,7 @@ public class RootConfig {
 implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0'
 ```
 
-2. mybatis xml 설정
+3. mybatis xml 설정
 - resources폴더 안에 mybatis 설정된 인터페이스 경로와 똑같이 경로 파일을 설정한다.
   (com.spring.mvc.score.repository.ScoreMapper.java)로 되어있으면 그대로 파일을 만들고 java 파일 이름과 똑같이  xml파일을 만들어 주면 된다!
 ```
