@@ -5,6 +5,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +32,57 @@ class BoardMapperTest {
 
         }
         System.out.println("게시물 등록 성공!!");
+
+    }
+
+    @Test
+    @DisplayName("전체 게시물을 글번호 내림차순으로 조회해야 한다.")
+    void selectAll() {
+        List<Board> articles = boardMapper.getArticles();
+        // 데이터베이스에 300개에 있나 단언해보는 것테스
+        assertTrue(articles.size() == 300);
+
+
+
+
+    }
+
+    @Test
+    @DisplayName("글번호를 통해 1개의 게시물을 상세 조회해야 한다.")
+    void selectOne() {
+        Board content = boardMapper.getContent(30);
+
+        assertEquals("USER30", content.getWriter());
+    }
+
+    @Test
+    @DisplayName("글번호를 통해 게시물을 1개 삭제해야 한다.")
+    @Transactional
+    @Rollback
+    void delete() {
+        boolean result = boardMapper.deleteArticle(100);
+        Board content = boardMapper.getContent(100);
+
+        System.out.println("content = " + content);
+        System.out.println("result = " + result);
+
+        assertTrue(result);
+        assertNull(content);
+    }
+
+    @Test
+    @DisplayName("글번호를 통해 게시물의 제목과 내용을 수정해야 한다.")
+    void modify() {
+        Board board = new Board();
+        board.setBoardNo(50);
+        board.setTitle("수정수정");
+        board.setContent("메롱메롱메롱");
+
+        boolean result = boardMapper.modifyArticle(board);
+        Board content = boardMapper.getContent(50);
+
+        assertTrue(result);
+        assertEquals("수정수정", content.getTitle());
 
     }
 

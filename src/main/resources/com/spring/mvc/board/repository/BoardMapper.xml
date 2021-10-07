@@ -38,7 +38,7 @@
 
     <!-- 5. 게시물 수정 -->
     <update id="modifyArticle">
-        UPDATA board SET title = #{title}, content = #{content}
+        UPDATE board SET title = #{title}, content = #{content}
         WHERE board_no =  #{boardNo}
     </update>
 

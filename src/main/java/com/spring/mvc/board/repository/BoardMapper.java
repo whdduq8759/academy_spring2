@@ -8,6 +8,8 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
+
+
     //1. 게시물 목록 조회
     List<Board> getArticles();
 
