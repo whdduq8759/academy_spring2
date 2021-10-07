@@ -145,7 +145,7 @@
             
             // 삭제 버튼 클릭 이벤트
             const table = document.querySelector('table');
-            const boardNo = '${article.boardNo}';
+         
 
             table.addEventListener('click', e => {
 
@@ -157,7 +157,7 @@
 
                 const boardNo = e.target.dataset.boardNo;
 
-                if(confrim('정말로 삭제하시겠습니까?')) {
+                if(confirm('정말로 삭제하시겠습니까?')) {
                     location.href = '/board/delete?boardNo='+ boardNo;
                 }
             });
