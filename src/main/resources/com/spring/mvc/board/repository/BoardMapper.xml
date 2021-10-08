@@ -18,28 +18,36 @@
 
     <!-- 2. 게시물 상세 조회 -->
     <select id="getContent" resultMap="boardMap">
-    SELECT * FROM board
+        SELECT * FROM board
         WHERE board_no = #{boardNo}
     </select>
 
     <!-- 3. 게시물 등록 -->
     <insert id="insertArticle">
         INSERT INTO board
-            (board_no, title, content, writer)
+        (board_no, title, content, writer)
         VALUES
-            (seq_board.nextval, #{title}, #{content}, #{writer})
+        (seq_board.nextval, #{title}, #{content}, #{writer})
     </insert>
 
     <!-- 4. 게시물 삭제 -->
     <delete id="deleteArticle">
-    DELETE FROM board
+        DELETE FROM board
         WHERE board_no = #{boardNo}
     </delete>
 
     <!-- 5. 게시물 수정 -->
     <update id="modifyArticle">
         UPDATE board SET title = #{title}, content = #{content}
-        WHERE board_no =  #{boardNo}
+        WHERE board_no = #{boardNo}
+    </update>
+
+    <!-- 조회수 상승 -->
+    <update id="upViewCount">
+        UPDATE board
+        SET view_cnt = view_cnt + 1
+        WHERE board_no = #{boardNo}
+
     </update>
 
 </mapper>

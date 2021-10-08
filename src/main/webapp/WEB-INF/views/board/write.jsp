@@ -38,10 +38,14 @@
 			display: flex;
 		}
 	</style>
-
+			<%@ include file= "../include/static-head.jsp" %>
 </head>
 
+
 <body>
+
+	<%@ include file= "../include/header.jsp" %>
+
 
 	<h1>게시글 등록</h1>
 
@@ -53,12 +57,12 @@
 			# 내용: <br>
 			<textarea rows="5" cols="30" name="content"></textarea>
 			<br>
-			
+
 		</p>
 		<button type="submit">등록</button>
 	</form>
 
-	<a href="/board/list">글 목록보기</a>	
+	<a href="/board/list">글 목록보기</a>
 
 </body>
 

@@ -67,5 +67,22 @@ public class BoardController {
         return "redirect:/board/list";
     }
 
+    // 수정 페이지 나오게 요청
+    @GetMapping("/modify")
+    public String modifyPage(int boardNo, Model model) {
+        log.info("/board/modify GET! " + boardNo);
+        Board content = boardService.innerArticles(boardNo);
+        model.addAttribute("article", content);
+
+        return  "board/modify";
+    }
+
+    //5. 게시물 수정 요청
+    @PostMapping("/modify")
+    public String modify(Board board) {
+        log.info("/board/modify POST! " + board);
+        boardService.modify(board);
+        return "redirect:/board/content?boardNo=" + board.getBoardNo();
+    }
 
 }

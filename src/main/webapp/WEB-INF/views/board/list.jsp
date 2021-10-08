@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -36,10 +37,12 @@
         }
 
         .amount {
-            width: 30%;
+            width: 100%;
             display: flex;
             justify-content: flex-end;
             margin-bottom: 10px;
+            position: absolute;
+            right: 10%;
         }
 
         .amount a {
@@ -55,114 +58,141 @@
             text-decoration: none;
 
         }
+        
+        table{
+            width: 80%;
+            height: 50px;
+        }
+        table tr {
+            border-bottom: 1px solid #000;
+        }
+        table tr th{
+            text-align: center;
+            border-right: 1px solid #000;
+        }
+
+        table tr td{
+            line-height: 50px;
+            border-right: 1px solid #000;
+            text-align: center;
+        }
     </style>
-    <link rel="stylesheet" href="/css/main.css">
 
-
+    <%@ include file= "../include/static-head.jsp" %>
 </head>
 
 <body>
 
 
+    <%@ include file= "../include/header.jsp" %>
 
-
-    <h1>게시글 목록</h1>
+    <h2>게시글 목록</h2>
 
     <div class="amount">
         <a href="#">10</a>
         <a href="#">20</a>
         <a href="#">30</a>
-		</div>
+    </div>
 
-		<table border = "1">
-            <tr>
-                <td>번호</td>
-                <td>작성자</td>
-                <td>제목</td>
-                <td>조회수</td>
-                <td>비고</td>
-            </tr>
-
-
-            <c:forEach var="article" items="${articles}">
-                <tr>
-                    <td>${article.boardNo}</td>
-                    <td>${article.writer}</td>
-                    <td>
-                        <a href="/board/content?boardNo=${article.boardNo}">${article.title}</a>
-                    </td>
-                    <td>${article.viewCnt}</td>
-                    <td>
-
-                        <a data-board-no="${article.boardNo}" class ="del-btn" href="#">[삭제]</a>
-        </a>
-
-        </td>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>작성자</th>
+            <th>제목</th>
+            <th>작성시간</th>
+            <th>조회수</th>
+            <th>비고</th>
         </tr>
+
+
+        <c:forEach var="article" items="${articles}">
+            <tr>
+                <td>${article.boardNo}</td>
+                <td>${article.writer}</td>
+                <td>
+                    <a href="/board/content?boardNo=${article.boardNo}">${article.title}</a>
+
+                    <c:if test="${article.newFlag}">
+                        <span class="badge rounded-pill bg-danger">new</span>
+                    </c:if>
+
+                </td>
+                <td>
+                    <fmt:formatDate value="${article.regDate}" pattern="yyyy-MM-dd a hh:mm:ss" />
+
+
+                </td>
+                <td>${article.viewCnt}</td>
+                <td>
+
+                    <a data-board-no="${article.boardNo}" class="del-btn" href="#">[삭제]</a>
+                    </a>
+
+                </td>
+            </tr>
         </c:forEach>
 
-        </table>
+    </table>
 
-        <!-- 페이지 영역 -->
-        <ul class="pagination">
-
-
-        </ul>
+    <!-- 페이지 영역 -->
+    <ul class="pagination">
 
 
-        <!-- 검색창 영역 -->
-        <div class="search">
-            <form action="/board/list" id="search-form">
+    </ul>
 
-                <select name="type">
-                    <option value="title">제목</option>
-                    <option value="content">내용</option>
-                    <option value="writer">작성자</option>
-                    <option value="titleContent">제목+내용
-                    </option>
-                </select>
 
-                <input type="text" name="keyword" placeholder="검색어를 입력!" value="">
+    <!-- 검색창 영역 -->
+    <div class="search">
+        <form action="/board/list" id="search-form">
 
-                <button type="submit">검색</button>
+            <select name="type">
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="writer">작성자</option>
+                <option value="titleContent">제목+내용
+                </option>
+            </select>
 
-            </form>
-        </div>
+            <input type="text" name="keyword" placeholder="검색어를 입력!" value="">
 
-        <p>
-            <a href="/board/write">게시글 작성하기</a>
-        </p>
+            <button type="submit">검색</button>
 
-        <script>
-            // 게시물 등록 처리 알림
-            const msg = '${msg}';
-            if(msg === 'success') {
-                alert('게시물 등록 성공!')
-            } else if(msg === 'fail') {
-                alert('게시물 등록 실패!')
+        </form>
+    </div>
+
+    <p>
+        <a href="/board/write">게시글 작성하기</a>
+    </p>
+
+    <script>
+        // 게시물 등록 처리 알림
+        const msg = '${msg}';
+        if (msg === 'success') {
+            alert('게시물 등록 성공!')
+        } else if (msg === 'fail') {
+            alert('게시물 등록 실패!')
+        }
+
+
+        // 삭제 버튼 클릭 이벤트
+        const table = document.querySelector('table');
+
+
+        table.addEventListener('click', e => {
+
+            if (!e.target.matches('table a.del-btn')) return;
+
+            e.preventDefault(); // a태그 링크이동기능 중지
+
+            console.log('삭제 버튼 클릭됨!');
+
+            const boardNo = e.target.dataset.boardNo;
+
+            if (confirm('정말로 삭제하시겠습니까?')) {
+                location.href = '/board/delete?boardNo=' + boardNo;
             }
-
-            
-            // 삭제 버튼 클릭 이벤트
-            const table = document.querySelector('table');
-         
-
-            table.addEventListener('click', e => {
-
-                if(!e.target.matches('table a.del-btn')) return;
-
-                e.preventDefault(); // a태그 링크이동기능 중지
-
-                console.log('삭제 버튼 클릭됨!');
-
-                const boardNo = e.target.dataset.boardNo;
-
-                if(confirm('정말로 삭제하시겠습니까?')) {
-                    location.href = '/board/delete?boardNo='+ boardNo;
-                }
-            });
-
-        </script>
+        });
+    </script>
 
 
 
