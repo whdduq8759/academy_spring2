@@ -42,7 +42,8 @@
             justify-content: flex-end;
             margin-bottom: 10px;
             position: absolute;
-            right: 10%;
+            right: 6%;
+            top: 12%;
         }
 
         .amount a {
@@ -58,24 +59,7 @@
             text-decoration: none;
 
         }
-        
-        table{
-            width: 80%;
-            height: 50px;
-        }
-        table tr {
-            border-bottom: 1px solid #000;
-        }
-        table tr th{
-            text-align: center;
-            border-right: 1px solid #000;
-        }
-
-        table tr td{
-            line-height: 50px;
-            border-right: 1px solid #000;
-            text-align: center;
-        }
+ 
     </style>
 
     <%@ include file= "../include/static-head.jsp" %>
@@ -94,8 +78,8 @@
         <a href="#">30</a>
     </div>
 
-    <table border="1">
-        <tr>
+    <table border="1" class="table table-hover">
+        <tr class="table-dark">
             <th>번호</th>
             <th>작성자</th>
             <th>제목</th>
