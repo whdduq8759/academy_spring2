@@ -1,6 +1,7 @@
 package com.spring.mvc.board.repository;
 
 import com.spring.mvc.board.domain.Board;
+import com.spring.mvc.common.paging.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ class BoardMapperTest {
 
             board.setTitle("테스트 제목 " + i);
             board.setContent("테스트내용이다다ㅏㅏㅏㅏㅏ다 " + i);
-            board.setWriter("user " + i );
+            board.setWriter("user " + i);
 
             boardMapper.insertArticle(board);
 
@@ -41,8 +42,6 @@ class BoardMapperTest {
         List<Board> articles = boardMapper.getArticles();
         // 데이터베이스에 300개에 있나 단언해보는 것테스
         assertTrue(articles.size() == 300);
-
-
 
 
     }
@@ -84,6 +83,23 @@ class BoardMapperTest {
         assertTrue(result);
         assertEquals("수정수정", content.getTitle());
 
+    }
+
+    @Test
+    @DisplayName("페이징을 적용하여 게시물이 조회되어야 한다.")
+    void pageTest1() {
+
+        int page = 1;
+        int amount = 20;
+        Page p = new Page();
+        p.setPageNum(page);
+        p.setAmount(amount);
+
+        List<Board> articles = boardMapper.getArticles(p);
+
+        for (Board article : articles) {
+            System.out.println(article);
+        }
     }
 
 }

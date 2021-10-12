@@ -9,31 +9,15 @@
     <meta charset="UTF-8">
     <title>Insert title here</title>
     <style>
-        .pagination {
-            width: 60%;
-            margin-top: 10px;
-            list-style: none;
-            display: flex;
+        ul.pagination {
+            width: fit-content;
+            margin: 5px auto;
         }
 
-        .pagination>li {
-            justify-content: flex-end;
-            margin-right: 5px;
-        }
+        ul.pagination li.p-active a {
+            background: orangered;
+            color: white;
 
-        .pagination>li>a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .pagination>li>a:hover {
-            color: yellowgreen;
-        }
-
-        .pagination>li.active>a {
-            font-weight: bold;
-            color: orangered;
-            font-size: 1.1em;
         }
 
         .amount {
@@ -59,7 +43,6 @@
             text-decoration: none;
 
         }
- 
     </style>
 
     <%@ include file= "../include/static-head.jsp" %>
@@ -73,9 +56,9 @@
     <h2>게시글 목록</h2>
 
     <div class="amount">
-        <a href="#">10</a>
-        <a href="#">20</a>
-        <a href="#">30</a>
+        <a href="/board/list?amount=10">10</a>
+        <a href="/board/list?amount=20">20</a>
+        <a href="/board/list?amount=30">30</a>
     </div>
 
     <table border="1" class="table table-hover">
@@ -121,8 +104,21 @@
     <!-- 페이지 영역 -->
     <ul class="pagination">
 
+        <c:if test="${maker.prev}">
+            <li class="page-item"><a class="page-link" href="/board/list?pageNum=${maker.beginPage - 1}">Prev</a></li>
+        </c:if>
 
+        <c:forEach var="i" begin="${maker.beginPage}" end="${maker.endPage}" step="1">
+            <li class="page-item"><a class="page-link" href="/board/list?pageNum=${i}">${i}</a></li>
+        </c:forEach>
+
+        <c:if test="${maker.next}">
+            <li class="page-item"><a class="page-link" href="/board/list?pageNum=${maker.endPage + 1}">Next</a></li>
+        </c:if>
+
+     
     </ul>
+
 
 
     <!-- 검색창 영역 -->
@@ -133,8 +129,7 @@
                 <option value="title">제목</option>
                 <option value="content">내용</option>
                 <option value="writer">작성자</option>
-                <option value="titleContent">제목+내용
-                </option>
+                <option value="titleContent">제목+내용</option>
             </select>
 
             <input type="text" name="keyword" placeholder="검색어를 입력!" value="">
