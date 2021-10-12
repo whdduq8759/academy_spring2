@@ -83,3 +83,4 @@ public class BoardController {
         return "redirect:/board/content?boardNo=" + board.getBoardNo();
     }
 }
+
