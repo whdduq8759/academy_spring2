@@ -9,16 +9,17 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
 
-
-
     //1. 게시물 목록 조회
     List<Board> getArticles();
-    
+
     //1-2. 페이징 적용
     List<Board> getArticles(Page page);
 
-    // 총 게시물 수 조회
-    int getTotalCount();
+    //1-3. 검색 적용
+    List<Board> getSearchArticles(Page page);
+
+    //총 게시물 수 조회
+    int getTotalCount(Page page);
 
     //2. 게시물 상세 조회
     Board getContent(int boardNo);
