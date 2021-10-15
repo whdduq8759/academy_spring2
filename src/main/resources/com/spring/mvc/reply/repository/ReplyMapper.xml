@@ -16,14 +16,14 @@
 
     <!-- 댓글 입력 -->
     <insert id="save">
-    INSERT INTO tbl_reply (reply_no, board_no, reply_text, reply_writer)
+        INSERT INTO tbl_reply (reply_no, board_no, reply_text, reply_writer)
         VALUES
-            (seq_reply.nextval, #{boardNo}, #{replyText}, #{replyWriter})
+        (seq_reply.nextval, #{boardNo}, #{replyText}, #{replyWriter})
     </insert>
 
     <!-- 댓글 수정 -->
     <update id="update">
-    UPDATE tbl_reply
+        UPDATE tbl_reply
         SET reply_text = #{replyText}
         WHERE reply_no = #{replyNo}
 
@@ -31,7 +31,7 @@
 
     <!-- 댓글 삭제 -->
     <delete id="delete">
-    DELETE FROM tbl_reply
+        DELETE FROM tbl_reply
         WHERE reply_no = #{replyNo}
 
     </delete>
@@ -42,4 +42,9 @@
         WHERE board_no = #{boardNo}
     </select>
 
+    <!-- 댓글 1개 조회   -->
+    <select id="read" resultMap="replyMap">
+        SELECT * FROM tbl_reply
+        WHERE reply_no =#{replyNo}
+    </select>
 </mapper>

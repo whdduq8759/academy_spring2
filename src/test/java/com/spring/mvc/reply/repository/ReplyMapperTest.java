@@ -42,7 +42,7 @@ class ReplyMapperTest {
     }
 
 
-   /* @Test
+    @Test
     @DisplayName("특정 게시물을 수정할 수 있어야 한다.")
     void updateTest() {
         Reply reply = replyMapper.read(15);
@@ -52,7 +52,7 @@ class ReplyMapperTest {
 
         assertEquals(reply.getReplyText(), replyMapper.read(15).getReplyText());
     }
-*/
+
     @Test
     @DisplayName("특정 게시물을 삭제할 수 있어야 한다.")
     @Transactional
@@ -61,7 +61,7 @@ class ReplyMapperTest {
         replyMapper.delete(11);
         replyMapper.delete(12);
 
-//        assertTrue(replyMapper.getList(322).size() == 16);
+        assertTrue(replyMapper.getList(309).size() == 18);
     }
 
 
