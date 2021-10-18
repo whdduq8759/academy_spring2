@@ -50,6 +50,7 @@
 	<h1>게시글 등록</h1>
 
 	<form action="/board/write" method="post">
+		
 		<p>
 
 			# 작성자: <input class="form-control" type="text" name="writer"><br>
