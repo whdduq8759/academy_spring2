@@ -1,3 +1,8 @@
+
+
+CREATE SEQUENCE seq_board;
+
+DROP TABLE board;
 CREATE TABLE board (
     board_no NUMBER(10),
     writer VARCHAR2(20) NOT NULL,

@@ -38,33 +38,32 @@
 			display: flex;
 		}
 	</style>
-			<%@ include file= "../include/static-head.jsp" %>
-</head>
 
+	<%@ include file="../include/static-head.jsp" %>
+</head>
 
 <body>
 
-	<%@ include file= "../include/header.jsp" %>
+	<%@ include file="../include/header.jsp" %>
 
+	<div class="write-container">
+		<h2>게시글 등록</h2>
 
-	<h1>게시글 등록</h1>
+		<form class="write-form" action="/board/write" method="post">
+			<div class="input-box">
 
-	<form action="/board/write" method="post">
-		
-		<p>
+				# 작성자: <input class="form-control" type="text" name="writer" readonly value="${loginUser.account}"><br>
 
-			# 작성자: <input class="form-control" type="text" name="writer"><br>
-			# 제목: <input type="text" name="title"><br>
-			# 내용: <br>
-			<textarea rows="5" cols="30" name="content"></textarea>
-			<br>
+				# 제목: <input class="form-control" type="text" name="title"><br>
+				# 내용: <br>
+				<textarea class="form-control" rows="5" cols="30" name="content"></textarea>
 
-		</p>
-		<button type="submit">등록</button>
-	</form>
+			</div>
+			<button type="submit">등록</button>
+		</form>
 
-	<a href="/board/list">글 목록보기</a>
-
+		<a href="/board/list">글 목록보기</a>
+	</div>
 </body>
 
 </html>

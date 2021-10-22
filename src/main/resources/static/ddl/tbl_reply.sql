@@ -1,3 +1,4 @@
+
 CREATE SEQUENCE seq_reply;
 
 CREATE TABLE tbl_reply (

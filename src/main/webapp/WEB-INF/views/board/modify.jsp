@@ -32,13 +32,14 @@
             display: flex;
         }
     </style>
-    <%@ include file= "../include/static-head.jsp" %>
+
+
+    <%@ include file="../include/static-head.jsp" %>
 </head>
 
 <body>
 
-    <%@ include file= "../include/header.jsp" %>
-
+    <%@ include file="../include/header.jsp" %>
 
     <div class="container">
         <div class="row">
@@ -46,29 +47,24 @@
                 <h1>${article.boardNo}번 게시물 내용</h1>
 
                 <form action="/board/modify" method="POST">
-                    
+
                     <input type="hidden" name="boardNo" value="${article.boardNo}">
 
                     # 글번호: ${article.boardNo}<br>
                     # 작성자: ${article.writer}<br>
-                    # 제목: <input type="text" name="title" value="${article.title}"><br>
+                    # 제목: <input type="text" name="title" value="${article.title}"> <br>
                     # 내용: <br>
                     <textarea name="content" rows="5" cols="30">${article.content}</textarea>
 
                     <br>
-
                     <button class="btn btn-primary" type="submit">수정</button>
 
                     <a class="btn btn-warning" href="/board/list">목록</a>
                 </form>
 
 
-
-
-
             </div>
         </div>
-
     </div> <!-- end content container -->
 
 </body>
